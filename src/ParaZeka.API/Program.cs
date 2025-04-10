@@ -4,6 +4,7 @@ using ParaZeka.API.Middlewares;
 using ParaZeka.Application;
 using ParaZeka.Infrastructure;
 using ParaZeka.Persistence;
+using ParaZeka.Persistence.Seed; // Seed sýnýfý için namespace ekleyin
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,6 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -31,35 +30,21 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Migrate database and seed data
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-
-        if (app.Environment.IsDevelopment())
-        {
-            // Migrate database only in development environment
-            context.Database.EnsureCreated();
-
-            // Seed default data
-            await Persistence.Seed.ApplicationDbContextSeed.SeedDefaultDataAsync(context);
-        }
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-    }
-}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // Development only database initialization
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        db.Database.EnsureCreated();
+
+        // ApplicationDbContextSeed sýnýfýný kullanýrken doðru namespace'i referans edin
+        await ApplicationDbContextSeed.SeedDefaultDataAsync(db);
+    }
 }
 
 app.UseHttpsRedirection();
