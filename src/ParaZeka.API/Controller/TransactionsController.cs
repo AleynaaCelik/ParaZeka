@@ -1,14 +1,17 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿// src/ParaZeka.API/Controllers/TransactionsController.cs
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ParaZeka.Application.Features.Transactions.Commands;
+using ParaZeka.Application.Common.Models;
+using ParaZeka.Application.Features.Transactions.Commands.CreateTransaction;
 using ParaZeka.Application.Features.Transactions.Queries;
 using ParaZeka.Application.Features.Transactions.Queries.GetTransactionsList;
 
-namespace ParaZeka.API.Controller
+namespace ParaZeka.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
     public class TransactionsController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -19,7 +22,7 @@ namespace ParaZeka.API.Controller
         }
 
         [HttpGet]
-        public async Task<ActionResult<TransactionsListVm>> GetTransactions(
+        public async Task<ActionResult> GetTransactions(
             [FromQuery] Guid? accountId,
             [FromQuery] Guid? categoryId,
             [FromQuery] DateTime? startDate,
@@ -48,7 +51,7 @@ namespace ParaZeka.API.Controller
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateTransaction([FromBody] CreateTransactionCommand command)
+        public async Task<ActionResult> CreateTransaction([FromBody] CreateTransactionCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -61,4 +64,3 @@ namespace ParaZeka.API.Controller
         }
     }
 }
-

@@ -1,12 +1,8 @@
-﻿using FluentValidation;
+﻿using System.Reflection;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using ParaZeka.Application.Common.Behaviors; // Bu satırı eklediğinizden emin olun
 
 namespace ParaZeka.Application
 {
@@ -26,4 +22,3 @@ namespace ParaZeka.Application
         }
     }
 }
-

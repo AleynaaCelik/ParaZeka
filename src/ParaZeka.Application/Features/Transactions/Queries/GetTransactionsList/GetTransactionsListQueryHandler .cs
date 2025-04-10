@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using ParaZeka.Application.Common.Interfaces;
 using ParaZeka.Application.Common.Models;
 using System;
@@ -8,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParaZeka.Application.Features.Transactions.Queries
+namespace ParaZeka.Application.Features.Transactions.Queries.GetTransactionsList
 {
     public class GetTransactionsListQueryHandler : IRequestHandler<GetTransactionsListQuery, Result<TransactionsListVm>>
     {
