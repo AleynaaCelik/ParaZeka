@@ -62,3 +62,6 @@ Kullanıcıların finansal durumlarını yönetmelerine yardımcı olan, yapay z
 - Bütçe planlama ve harcama alışkanlıklarını değiştirme desteği
 - Kullanıcı dostu arayüz ve interaktif görselleştirmeler
 - Güçlü veri güvenliği ve gizlilik politikası
+
+![image](https://github.com/user-attachments/assets/f3f976c7-fa65-46fc-9079-9775e97d4999)
+
