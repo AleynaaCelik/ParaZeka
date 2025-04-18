@@ -1,7 +1,7 @@
 // src/components/transactions/TransactionModal.js
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createTransaction, updateTransaction } from '../../store/transactionSlice';
+import { createTransaction } from '../../store/transactionSlice';
 import { fetchCategories } from '../../store/categorySlice';
 import { fetchAccounts } from '../../store/accountSlice';
 
@@ -13,7 +13,7 @@ const TransactionModal = ({ isOpen, onClose, transaction = null }) => {
   const [formData, setFormData] = useState({
     amount: '',
     description: '',
-    transactionDate: new Date().toISOString().substr(0, 10),
+    transactionDate: new Date().toISOString().split('T')[0],
     type: 'Expense',
     accountId: '',
     categoryId: '',
@@ -32,7 +32,7 @@ const TransactionModal = ({ isOpen, onClose, transaction = null }) => {
     if (transaction) {
       setFormData({
         ...transaction,
-        transactionDate: new Date(transaction.transactionDate).toISOString().substr(0, 10)
+        transactionDate: new Date(transaction.transactionDate).toISOString().split('T')[0]
       });
     }
   }, [dispatch, transaction]);
@@ -54,14 +54,7 @@ const TransactionModal = ({ isOpen, onClose, transaction = null }) => {
     };
     
     try {
-      if (transaction) {
-        // Güncelleme modu
-        await dispatch(updateTransaction({ id: transaction.id, transaction: transactionData }));
-      } else {
-        // Yeni işlem ekleme modu
-        await dispatch(createTransaction(transactionData));
-      }
-      
+      await dispatch(createTransaction(transactionData));
       onClose();
     } catch (error) {
       console.error('İşlem kaydedilemedi:', error);
@@ -163,71 +156,11 @@ const TransactionModal = ({ isOpen, onClose, transaction = null }) => {
               onChange={handleChange}
             >
               <option value="">Kategori Seçin</option>
-              {categories
-                .filter(c => formData.type === 'Income' ? c.name.includes('Income') : !c.name.includes('Income'))
-                .map(category => (
-                  <option key={category.id} value={category.id}>{category.name}</option>
-                ))
-              }
+              {categories.map(category => (
+                <option key={category.id} value={category.id}>{category.name}</option>
+              ))}
             </select>
           </div>
-          
-          <div className="form-row">
-            <div className="form-group">
-              <label className="form-label">Satıcı/Firma</label>
-              <input
-                type="text"
-                name="merchantName"
-                className="form-control"
-                value={formData.merchantName || ''}
-                onChange={handleChange}
-                placeholder="Satıcı veya firma adı"
-              />
-            </div>
-            
-            <div className="form-group">
-              <label className="form-label">Konum</label>
-              <input
-                type="text"
-                name="location"
-                className="form-control"
-                value={formData.location || ''}
-                onChange={handleChange}
-                placeholder="İşlem konumu"
-              />
-            </div>
-          </div>
-          
-          <div className="form-group">
-            <label className="form-check">
-              <input
-                type="checkbox"
-                name="isRecurring"
-                checked={formData.isRecurring}
-                onChange={handleChange}
-              />
-              <span className="ms-2">Düzenli İşlem</span>
-            </label>
-          </div>
-          
-          {formData.isRecurring && (
-            <div className="form-group">
-              <label className="form-label">Tekrarlama Şekli</label>
-              <select
-                name="recurrencePattern"
-                className="form-control"
-                value={formData.recurrencePattern || ''}
-                onChange={handleChange}
-                required={formData.isRecurring}
-              >
-                <option value="">Seçin</option>
-                <option value="Daily">Günlük</option>
-                <option value="Weekly">Haftalık</option>
-                <option value="Monthly">Aylık</option>
-                <option value="Yearly">Yıllık</option>
-              </select>
-            </div>
-          )}
           
           <div className="modal-footer">
             <button type="button" className="btn btn-outline" onClick={onClose}>İptal</button>

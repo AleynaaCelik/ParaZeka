@@ -6,33 +6,23 @@ import { fetchAccounts } from '../store/accountSlice';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
-  const { transactions, loading: transactionsLoading } = useSelector((state) => state.transactions);
-  const { accounts, loading: accountsLoading } = useSelector((state) => state.accounts);
-  
+  const { transactions, loading: transactionsLoading } = useSelector(state => state.transactions);
+  const { accounts, loading: accountsLoading } = useSelector(state => state.accounts);
+
   useEffect(() => {
     dispatch(fetchTransactions({ pageNumber: 1, pageSize: 5 }));
     dispatch(fetchAccounts());
   }, [dispatch]);
-  
+
   // Hesap bakiyelerini hesaplama
   const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
   
   // Bu ay gelir ve giderleri hesaplama
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth();
-  const currentYear = currentDate.getFullYear();
-  
-  const thisMonthTransactions = transactions.filter(t => {
-    const transactionDate = new Date(t.transactionDate);
-    return transactionDate.getMonth() === currentMonth && 
-           transactionDate.getFullYear() === currentYear;
-  });
-  
-  const totalIncome = thisMonthTransactions
+  const thisMonthIncome = transactions
     .filter(t => t.type === 'Income')
     .reduce((sum, t) => sum + t.amount, 0);
     
-  const totalExpense = thisMonthTransactions
+  const thisMonthExpense = transactions
     .filter(t => t.type === 'Expense')
     .reduce((sum, t) => sum + t.amount, 0);
 
@@ -53,14 +43,14 @@ const Dashboard = () => {
         
         <div className="card">
           <h2>Bu Ay Gelir</h2>
-          <p className="amount income">₺{totalIncome.toFixed(2)}</p>
-          <p className="meta">{new Date().toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}</p>
+          <p className="amount income">₺{thisMonthIncome.toFixed(2)}</p>
+          <p className="meta">Nisan 2025</p>
         </div>
         
         <div className="card">
           <h2>Bu Ay Gider</h2>
-          <p className="amount expense">₺{totalExpense.toFixed(2)}</p>
-          <p className="meta">{new Date().toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}</p>
+          <p className="amount expense">₺{thisMonthExpense.toFixed(2)}</p>
+          <p className="meta">Nisan 2025</p>
         </div>
       </div>
       

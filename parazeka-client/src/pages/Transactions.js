@@ -2,13 +2,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactions, setPageNumber, deleteTransaction } from '../store/transactionSlice';
+import TransactionModal from '../components/transactions/TransactionModal';
 
 const Transactions = () => {
   const dispatch = useDispatch();
-  const { transactions, loading, error, totalCount, pageNumber, pageSize } = useSelector((state) => state.transactions);
+  const { transactions, loading, error, totalCount, pageNumber, pageSize } = useSelector(state => state.transactions);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all'); // 'all', 'income', 'expense'
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   
   useEffect(() => {
     loadTransactions();
@@ -46,6 +49,21 @@ const Transactions = () => {
     }
   };
   
+  const handleAddTransaction = () => {
+    setSelectedTransaction(null); // Yeni işlem için
+    setIsModalOpen(true);
+  };
+  
+  const handleEditTransaction = (transaction) => {
+    setSelectedTransaction(transaction);
+    setIsModalOpen(true);
+  };
+  
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    loadTransactions(); // Modalı kapatınca işlemleri yenile
+  };
+
   const totalPages = Math.ceil(totalCount / pageSize);
 
   return (
@@ -89,7 +107,7 @@ const Transactions = () => {
       <div className="transactions-list card">
         <div className="transactions-header">
           <div className="actions">
-            <button className="btn btn-primary">+ Yeni İşlem</button>
+            <button className="btn btn-primary" onClick={handleAddTransaction}>+ Yeni İşlem</button>
           </div>
         </div>
         
@@ -122,7 +140,7 @@ const Transactions = () => {
                         {transaction.type === 'Income' ? '+' : '-'}₺{transaction.amount.toFixed(2)}
                       </td>
                       <td>
-                        <button className="btn-icon">✏️</button>
+                        <button className="btn-icon" onClick={() => handleEditTransaction(transaction)}>✏️</button>
                         <button 
                           className="btn-icon" 
                           onClick={() => handleDelete(transaction.id)}
@@ -162,6 +180,12 @@ const Transactions = () => {
           </>
         )}
       </div>
+      
+      <TransactionModal 
+        isOpen={isModalOpen} 
+        onClose={handleCloseModal} 
+        transaction={selectedTransaction} 
+      />
     </div>
   );
 };

@@ -1,15 +1,54 @@
 // src/store/transactionSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import transactionService from '../api/transactionService';
 
+// Asenkron işlemleri tanımlama
 export const fetchTransactions = createAsyncThunk(
   'transactions/fetchTransactions',
   async (params, { rejectWithValue }) => {
     try {
-      const response = await transactionService.getTransactions(params);
-      return response.data;
+      // API isteği yapılacak, şimdilik statik veri döndürelim
+      return {
+        transactions: [
+          {
+            id: '1',
+            transactionDate: '2025-04-15',
+            description: 'Market Alışverişi',
+            categoryName: 'Gıda',
+            categoryId: '1',
+            accountId: '1',
+            accountName: 'Vadesiz Hesap',
+            amount: 250,
+            type: 'Expense',
+          },
+          {
+            id: '2',
+            transactionDate: '2025-04-14',
+            description: 'Maaş',
+            categoryName: 'Maaş',
+            categoryId: '2',
+            accountId: '1',
+            accountName: 'Vadesiz Hesap',
+            amount: 6500,
+            type: 'Income',
+          },
+          {
+            id: '3',
+            transactionDate: '2025-04-10',
+            description: 'Elektrik Faturası',
+            categoryName: 'Faturalar',
+            categoryId: '3',
+            accountId: '2',
+            accountName: 'Kredi Kartı',
+            amount: 320,
+            type: 'Expense',
+          },
+        ],
+        totalCount: 3,
+        pageNumber: 1,
+        pageSize: 10,
+      };
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -18,15 +57,25 @@ export const createTransaction = createAsyncThunk(
   'transactions/createTransaction',
   async (transaction, { rejectWithValue }) => {
     try {
-      const response = await transactionService.createTransaction(transaction);
-      return response.data;
+      // API isteği yapılacak, şimdilik başarılı yanıt döndürelim
+      return { id: Date.now().toString(), ...transaction };
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.message);
     }
   }
 );
 
-// Diğer thunk'lar (update, delete) burada tanımlanabilir
+export const deleteTransaction = createAsyncThunk(
+  'transactions/deleteTransaction',
+  async (id, { rejectWithValue }) => {
+    try {
+      // API isteği yapılacak, şimdilik başarılı yanıt döndürelim
+      return { id };
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const initialState = {
   transactions: [],
@@ -60,11 +109,17 @@ const transactionSlice = createSlice({
       })
       .addCase(fetchTransactions.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Bir hata oluştu';
+        state.error = action.payload;
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
-        // Burada state'i güncelleyebilirsiniz, ancak genellikle
-        // yeni bir fetchTransactions çağrısı yapmak daha iyidir
+        // Yeni işlemi ekle
+        state.transactions.push(action.payload);
+        state.totalCount += 1;
+      })
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        // İşlemi sil
+        state.transactions = state.transactions.filter(t => t.id !== action.payload.id);
+        state.totalCount -= 1;
       });
   },
 });
