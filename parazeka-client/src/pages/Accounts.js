@@ -1,7 +1,35 @@
 // src/pages/Accounts.js
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAccounts } from '../store/accountSlice';
 
 const Accounts = () => {
+  const dispatch = useDispatch();
+  const { accounts, loading, error } = useSelector(state => state.accounts);
+
+  useEffect(() => {
+    dispatch(fetchAccounts());
+  }, [dispatch]);
+
+  // Varlıklar, borçlar ve net bakiyeyi hesapla
+  const totalAssets = accounts
+    .filter(account => account.balance > 0)
+    .reduce((sum, account) => sum + account.balance, 0);
+
+  const totalLiabilities = accounts
+    .filter(account => account.balance < 0)
+    .reduce((sum, account) => sum + Math.abs(account.balance), 0);
+
+  const netBalance = totalAssets - totalLiabilities;
+
+  if (loading) {
+    return <div>Hesaplar yükleniyor...</div>;
+  }
+
+  if (error) {
+    return <div>Hata: {error}</div>;
+  }
+
   return (
     <div className="accounts-page">
       <h1>Hesaplar</h1>
@@ -11,59 +39,40 @@ const Accounts = () => {
       </div>
       
       <div className="account-cards">
-        <div className="account-card">
-          <div className="account-card-header">
-            <span className="account-type">Vadesiz Hesap</span>
-            <h3>İş Bankası Hesabı</h3>
+        {accounts.map(account => (
+          <div 
+            key={account.id} 
+            className={`account-card ${account.balance < 0 ? 'credit' : account.accountType.includes('Birikim') ? 'savings' : ''}`}
+          >
+            <div className="account-card-header">
+              <span className="account-type">{account.accountType}</span>
+              <h3>{account.name}</h3>
+            </div>
+            <p className="account-number">{account.accountNumber}</p>
+            <div className={`amount ${account.balance < 0 ? 'expense' : ''}`}>
+              ₺{Math.abs(account.balance).toFixed(2)}
+            </div>
+            <div className="account-actions">
+              <button className="btn btn-outline">İşlemler</button>
+              <button className="btn btn-outline">Düzenle</button>
+            </div>
           </div>
-          <p className="account-number">TR12 3456 7890 1234 5678 90</p>
-          <div className="amount">₺3,250.00</div>
-          <div className="account-actions">
-            <button className="btn btn-outline">İşlemler</button>
-            <button className="btn btn-outline">Düzenle</button>
-          </div>
-        </div>
-        
-        <div className="account-card credit">
-          <div className="account-card-header">
-            <span className="account-type">Kredi Kartı</span>
-            <h3>Garanti Bonus Kart</h3>
-          </div>
-          <p className="account-number">**** **** **** 5678</p>
-          <div className="amount expense">-₺1,500.00</div>
-          <div className="account-actions">
-            <button className="btn btn-outline">İşlemler</button>
-            <button className="btn btn-outline">Düzenle</button>
-          </div>
-        </div>
-        
-        <div className="account-card savings">
-          <div className="account-card-header">
-            <span className="account-type">Birikim Hesabı</span>
-            <h3>Akbank Tasarruf</h3>
-          </div>
-          <p className="account-number">TR98 7654 3210 9876 5432 10</p>
-          <div className="amount">₺2,500.00</div>
-          <div className="account-actions">
-            <button className="btn btn-outline">İşlemler</button>
-            <button className="btn btn-outline">Düzenle</button>
-          </div>
-        </div>
+        ))}
       </div>
       
       <div className="account-summary card">
         <h3>Toplam Bakiye Özeti</h3>
         <div className="summary-row">
           <span>Toplam Varlıklar</span>
-          <span className="amount">₺5,750.00</span>
+          <span className="amount">₺{totalAssets.toFixed(2)}</span>
         </div>
         <div className="summary-row">
           <span>Toplam Borçlar</span>
-          <span className="amount expense">₺1,500.00</span>
+          <span className="amount expense">₺{totalLiabilities.toFixed(2)}</span>
         </div>
         <div className="summary-row total">
           <span>Net Toplam</span>
-          <span className="amount">₺4,250.00</span>
+          <span className="amount">₺{netBalance.toFixed(2)}</span>
         </div>
       </div>
     </div>
