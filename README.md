@@ -75,4 +75,7 @@ Kullanıcıların finansal durumlarını yönetmelerine yardımcı olan, yapay z
 
 ![image](https://github.com/user-attachments/assets/c7410efd-94e4-4b7f-ae16-0e153640116c)
 
+![image](https://github.com/user-attachments/assets/ab3da993-a8ef-42f8-ab1f-2afc4a2c6042)
+
+
 
