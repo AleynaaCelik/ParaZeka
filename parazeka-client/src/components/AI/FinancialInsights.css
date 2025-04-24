@@ -1,0 +1,289 @@
+:root {
+    --color-primary: #4a86e8;
+    --color-primary-light: #e8f0fe;
+    --color-success: #34a853;
+    --color-warning: #fbbc05;
+    --color-danger: #ea4335;
+    --color-info: #6c757d;
+    --color-dark: #333333;
+    --color-text: #444444;
+    --color-text-light: #6e6e6e;
+    --color-border: #e6e8eb;
+    --color-background: #f5f7fa;
+    --border-radius: 12px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  .financial-insights-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .financial-insights-header {
+    margin-bottom: 20px;
+  }
+  
+  .financial-insights-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-dark);
+  }
+  
+  .financial-insights-header p {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 14px;
+  }
+  
+  .financial-insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .financial-insight-card {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--color-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .financial-insight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .insight-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-primary-light);
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  
+  .insight-icon {
+    color: var(--color-primary);
+  }
+  
+  .insight-content {
+    flex: 1;
+  }
+  
+  .insight-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  
+  .insight-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-dark);
+  }
+  
+  .insight-severity-badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  
+  .insight-content p {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+  
+  .ai-generated-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 6px;
+    background-color: #f0f0f0;
+    color: var(--color-info);
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+  
+  .insight-action {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    padding: 8px 12px;
+    margin-left: auto;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .insight-action:hover {
+    background-color: var(--color-primary-light);
+  }
+  
+  .refresh-button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .refresh-button {
+    background-color: white;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .refresh-button:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+  }
+  
+  /* Yükleniyor durumu */
+  .financial-insights-container.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  
+  .loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-primary-light);
+    border-top: 3px solid var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .financial-insights-container.loading p {
+    color: var(--color-text-light);
+    margin: 0;
+  }
+  
+  /* Hata durumu */
+  .financial-insights-container.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--color-danger);
+  }
+  
+  .financial-insights-container.error svg {
+    margin-bottom: 16px;
+  }
+  
+  .financial-insights-container.error p {
+    margin: 0 0 16px 0;
+    color: var(--color-text);
+  }
+  
+  .financial-insights-container.error button {
+    background-color: white;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .financial-insights-container.error button:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary-light);
+  }
+  
+  /* Boş durumu */
+  .financial-insights-container.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--color-text-light);
+  }
+  
+  .financial-insights-container.empty svg {
+    margin-bottom: 16px;
+    color: var(--color-text-light);
+  }
+  
+  .financial-insights-container.empty h3 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  
+  .financial-insights-container.empty p {
+    margin: 0;
+    max-width: 400px;
+    color: var(--color-text-light);
+  }
+  
+  /* Mobil uyumluluk */
+  @media (max-width: 768px) {
+    .financial-insights-container {
+      padding: 16px;
+    }
+    
+    .financial-insight-card {
+      flex-direction: column;
+    }
+    
+    .insight-icon-container {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+    
+    .insight-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .insight-action {
+      margin-left: 0;
+      margin-top: 8px;
+      padding-left: 0;
+    }
+  }

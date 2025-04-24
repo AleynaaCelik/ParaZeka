@@ -1,0 +1,218 @@
+.finance-assistant-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .finance-assistant-button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #4a86e8;
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+  }
+  
+  .finance-assistant-button:hover {
+    background-color: #3a76d8;
+    transform: scale(1.05);
+  }
+  
+  .finance-assistant-panel {
+    position: absolute;
+    bottom: 76px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideIn 0.3s ease;
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .finance-assistant-header {
+    background-color: #4a86e8;
+    color: white;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .finance-assistant-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .finance-assistant-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .finance-assistant-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .finance-assistant-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .finance-assistant-message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    line-height: 1.4;
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+  
+  .user-message {
+    background-color: #4a86e8;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+  }
+  
+  .bot-message {
+    background-color: #e6e8eb;
+    color: #333;
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    min-width: 60px;
+    padding: 12px;
+  }
+  
+  .dot {
+    height: 8px;
+    width: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+  
+  .dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .dot:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  
+  .dot:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  @keyframes pulse {
+    0%, 50%, 100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.5);
+    }
+  }
+  
+  .finance-assistant-input {
+    display: flex;
+    padding: 12px;
+    background-color: white;
+    border-top: 1px solid #e6e8eb;
+  }
+  
+  .finance-assistant-input input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .finance-assistant-input input:focus {
+    border-color: #4a86e8;
+    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.1);
+  }
+  
+  .finance-assistant-input button {
+    background-color: transparent;
+    border: none;
+    color: #4a86e8;
+    margin-left: 8px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+  }
+  
+  .finance-assistant-input button:hover {
+    background-color: rgba(74, 134, 232, 0.1);
+  }
+  
+  .finance-assistant-input button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Mobil uyumluluk */
+  @media (max-width: 576px) {
+    .finance-assistant-panel {
+      width: calc(100vw - 40px);
+      height: 60vh;
+      bottom: 70px;
+      right: 10px;
+      left: 10px;
+    }
+    
+    .finance-assistant-button {
+      bottom: 10px;
+      right: 10px;
+    }
+  }

@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTransactions } from '../store/transactionSlice';
 import { fetchAccounts } from '../store/accountSlice';
+import FinancialInsights from '../components/AI/FinancialInsights';
+import FinanceAssistant from '../components/AI/FinanceAssistant';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -54,6 +56,9 @@ const Dashboard = () => {
         </div>
       </div>
       
+      {/* Finansal Öngörüler */}
+      <FinancialInsights />
+      
       <div className="recent-transactions">
         <h2>Son İşlemler</h2>
         <div className="card">
@@ -87,6 +92,9 @@ const Dashboard = () => {
           )}
         </div>
       </div>
+      
+      {/* Finans Asistanı (sabit konumda olacağı için sayfa yapısını etkilemez) */}
+      <FinanceAssistant />
     </div>
   );
 };
