@@ -2,6 +2,7 @@
 using ParaZeka.Application.Common.Interfaces;
 using ParaZeka.Application.Common.Models;
 using ParaZeka.Domain.Entities;
+using ParaZeka.Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;

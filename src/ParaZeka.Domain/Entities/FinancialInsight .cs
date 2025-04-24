@@ -1,4 +1,5 @@
 ﻿using ParaZeka.Domain.Common;
+using ParaZeka.Domain.Entities.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace ParaZeka.Domain.Entities
         public InsightType Type { get; set; }
         public InsightSeverity Severity { get; set; }
         public bool IsAIGenerated { get; set; } = false;
+
+        // Eksik özellikler
+        public bool IsRead { get; set; } = false;
+        public bool IsDismissed { get; set; } = false;
+        public DateTime? ValidUntil { get; set; }
+        public decimal? AmountImpact { get; set; }
+        public string Currency { get; set; } = "TRY";
     }
 
     public enum InsightType
@@ -21,14 +29,8 @@ namespace ParaZeka.Domain.Entities
         BudgetAlert,
         SpendingPattern,
         SavingOpportunity,
-        Anomaly
-    }
-
-    public enum InsightSeverity
-    {
-        Low,
-        Medium,
-        High
+        Anomaly,
+        UnusualActivity // Enum'a eklenmesi gereken bir değer
     }
 }
 

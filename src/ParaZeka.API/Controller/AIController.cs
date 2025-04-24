@@ -111,7 +111,7 @@ namespace ParaZeka.API.Controller
 
     public class FinancialQuestionDto
     {
-        public string Question { get; set; }
+        public required string Question { get; set; }
     }
 }
 

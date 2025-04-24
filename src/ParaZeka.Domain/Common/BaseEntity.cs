@@ -13,5 +13,6 @@ namespace ParaZeka.Domain.Common
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public DateTime? LastModifiedDate { get; set; } // Eksik özellik
     }
 }
