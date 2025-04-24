@@ -13,25 +13,15 @@ namespace ParaZeka.Domain.Entities
         public string Description { get; set; } = string.Empty;
         public InsightType Type { get; set; }
         public InsightSeverity Severity { get; set; }
-        public bool IsRead { get; set; }
-        public bool IsDismissed { get; set; }
-        public DateTime ValidUntil { get; set; }
-        public string? ActionText { get; set; }
-        public string? ActionUrl { get; set; }
-        public decimal? AmountImpact { get; set; }
-        public string? Currency { get; set; }
-        public Guid UserId { get; set; }
-        public virtual User User { get; set; } = null!;
+        public bool IsAIGenerated { get; set; } = false;
     }
 
     public enum InsightType
     {
+        BudgetAlert,
         SpendingPattern,
         SavingOpportunity,
-        BudgetAlert,
-        UnusualActivity,
-        FinancialTip,
-        GoalProgress
+        Anomaly
     }
 
     public enum InsightSeverity

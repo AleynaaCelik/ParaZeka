@@ -9,7 +9,9 @@ namespace ParaZeka.Domain.Common
     public abstract class BaseEntity
     {
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
