@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using ParaZeka.API.Middlewares;
 using ParaZeka.Application;
+using ParaZeka.Application.Common.Interfaces;
 using ParaZeka.Infrastructure;
+using ParaZeka.Infrastructure.Services;
 using ParaZeka.Persistence;
 using ParaZeka.Persistence.Seed; // Seed sýnýfý için namespace ekleyin
 
@@ -16,6 +18,10 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// OpenAI servisini kaydet
+builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
+builder.Services.AddScoped<IAIService, OpenAIService>();
 
 // Add CORS
 builder.Services.AddCors(options =>
