@@ -1,4 +1,5 @@
 // src/ParaZeka.API/Program.cs
+
 using Microsoft.EntityFrameworkCore;
 using ParaZeka.API.Middlewares;
 using ParaZeka.Application;
@@ -6,7 +7,7 @@ using ParaZeka.Application.Common.Interfaces;
 using ParaZeka.Infrastructure;
 using ParaZeka.Infrastructure.Services;
 using ParaZeka.Persistence;
-using ParaZeka.Persistence.Seed; // Seed sýnýfý için namespace ekleyin
+using ParaZeka.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// OpenAI servisini kaydet
+// OpenAI servisini yapýlandýr ve kaydet
 builder.Services.Configure<OpenAISettings>(builder.Configuration.GetSection("OpenAI"));
+
+builder.Services.AddHttpClient("OpenAI", client =>
+{
+    client.BaseAddress = new Uri("https://api.openai.com/v1/");
+});
+
 builder.Services.AddScoped<IAIService, OpenAIService>();
 
 // Add CORS
@@ -48,7 +55,6 @@ if (app.Environment.IsDevelopment())
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         db.Database.EnsureCreated();
 
-        // ApplicationDbContextSeed sýnýfýný kullanýrken doðru namespace'i referans edin
         await ApplicationDbContextSeed.SeedDefaultDataAsync(db);
     }
 }
