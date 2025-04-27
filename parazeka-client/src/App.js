@@ -8,6 +8,7 @@ import Accounts from './pages/Accounts';
 import Budgets from './pages/Budgets';
 import Goals from './pages/Goals';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
 
 // Korumalı Route bileşeni
@@ -36,6 +37,7 @@ function App() {
         <main className={isAuthenticated ? "container mt-4" : ""}>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/" element={
               <ProtectedRoute>
                 <Dashboard />
