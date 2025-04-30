@@ -1,7 +1,7 @@
 # ParaZeka - Yapay Zeka Destekli Kişisel Finans Asistanı
 
 ## Proje Özeti
-Kullanıcıların finansal durumlarını yönetmelerine yardımcı olan, yapay zeka ile güçlendirilmiş bir kişisel finans yönetim platformu. Bu uygulama, harcama alışkanlıklarını analiz eder, tasarruf tavsiyeleri sunar ve kullanıcıya özel finansal hedefler belirlemesine yardımcı olur.
+Kullanıcıların finansal durumlarını yönetmelerine yardımcı olan, yapay zeka ile güçlendirilmiş bir kişisel finans yönetim platformu. Bu uygulama, harcama alışkanlıklarını analiz eder, tasarruf tavsiyeleri sunar ve kullanıcıya özel finansal hedefler belirlemesine yardımcı olur
 
 ## Temel Özellikler
 
