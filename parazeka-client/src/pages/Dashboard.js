@@ -5,33 +5,37 @@ import { fetchTransactions } from '../store/transactionSlice';
 import { fetchAccounts } from '../store/accountSlice';
 import FinancialInsights from '../components/AI/FinancialInsights';
 import FinanceAssistant from '../components/AI/FinanceAssistant';
+import FinancialSummaryChart from '../components/Dashboard/FinancialSummaryChart';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { transactions, loading: transactionsLoading } = useSelector(state => state.transactions);
   const { accounts, loading: accountsLoading } = useSelector(state => state.accounts);
-
+  
   useEffect(() => {
     dispatch(fetchTransactions({ pageNumber: 1, pageSize: 5 }));
     dispatch(fetchAccounts());
   }, [dispatch]);
-
+  
   // Hesap bakiyelerini hesaplama
   const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0);
-  
+    
   // Bu ay gelir ve giderleri hesaplama
   const thisMonthIncome = transactions
     .filter(t => t.type === 'Income')
     .reduce((sum, t) => sum + t.amount, 0);
-    
+      
   const thisMonthExpense = transactions
     .filter(t => t.type === 'Expense')
     .reduce((sum, t) => sum + t.amount, 0);
-
+  
   if (transactionsLoading || accountsLoading) {
-    return <div>Yükleniyor...</div>;
+    return <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p>Finansal verileriniz yükleniyor...</p>
+    </div>;
   }
-
+  
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
@@ -56,10 +60,19 @@ const Dashboard = () => {
         </div>
       </div>
       
-      {/* Finansal Öngörüler */}
-      <FinancialInsights />
+      {/* Finansal Grafik Bileşeni */}
+      <div className="dashboard-section">
+        <h2>Finansal Analizler</h2>
+        <FinancialSummaryChart />
+      </div>
       
-      <div className="recent-transactions">
+      {/* Finansal Öngörüler */}
+      <div className="dashboard-section">
+        <h2>Finansal Öngörüler</h2>
+        <FinancialInsights />
+      </div>
+      
+      <div className="dashboard-section">
         <h2>Son İşlemler</h2>
         <div className="card">
           {transactions.length > 0 ? (
