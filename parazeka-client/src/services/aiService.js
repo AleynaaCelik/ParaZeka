@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../config';
+import apiCache from './apiCache';
 
 // API istekleri için yardımcı fonksiyon
 const API = axios.create({
