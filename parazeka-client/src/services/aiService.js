@@ -22,19 +22,6 @@ API.interceptors.request.use(
   }
 );
 
-// Hata interceptor'ü
-API.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem('authToken');
-      localStorage.setItem('isAuthenticated', 'false');
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
-
 // Geliştirme için örnek veriler
 const mockInsights = [
   {
@@ -72,8 +59,21 @@ const aiService = {
    * @returns {Promise<Array>} Finansal öngörüler listesi
    */
   getInsights: async () => {
+    const cacheKey = apiCache.generateKey('/ai/insights');
+    
+    // Önbellekte veri var mı kontrol et
+    const cachedData = apiCache.get(cacheKey);
+    if (cachedData) {
+      console.log('Önbellekten öngörüler alınıyor...');
+      return cachedData;
+    }
+    
     try {
       const response = await API.get('/ai/insights');
+      
+      // Başarılı yanıtı önbelleğe al
+      apiCache.set(cacheKey, response.data, 3 * 60 * 1000); // 3 dakika
+      
       return response.data;
     } catch (error) {
       console.error('Finansal öngörüler alınırken hata:', error);
@@ -89,8 +89,21 @@ const aiService = {
    * @returns {Promise<number>} Tahmini harcama tutarı
    */
   getMonthlyForecast: async (monthsAhead = 1) => {
+    const cacheKey = apiCache.generateKey('/ai/monthly-forecast', { monthsAhead });
+    
+    // Önbellekte veri var mı kontrol et
+    const cachedData = apiCache.get(cacheKey);
+    if (cachedData) {
+      console.log(`${monthsAhead} ay sonrası için önbellekten tahmin alınıyor...`);
+      return cachedData;
+    }
+    
     try {
       const response = await API.get(`/ai/monthly-forecast?monthsAhead=${monthsAhead}`);
+      
+      // Başarılı yanıtı önbelleğe al
+      apiCache.set(cacheKey, response.data, 5 * 60 * 1000); // 5 dakika
+      
       return response.data;
     } catch (error) {
       console.error('Aylık tahmin alınırken hata:', error);
@@ -105,8 +118,22 @@ const aiService = {
    * @returns {Promise<Object>} AI yanıtı
    */
   askFinancialQuestion: async (question) => {
+    // Sıkça sorulan sorular için önbellek kullan
+    const cacheKey = apiCache.generateKey('/ai/ask', { question });
+    
+    // Önbellekte veri var mı kontrol et
+    const cachedData = apiCache.get(cacheKey);
+    if (cachedData) {
+      console.log('Önbellekten cevap alınıyor...');
+      return cachedData;
+    }
+    
     try {
       const response = await API.post('/ai/ask', { question });
+      
+      // Başarılı yanıtı önbelleğe al (1 saat)
+      apiCache.set(cacheKey, response.data, 60 * 60 * 1000);
+      
       return response.data;
     } catch (error) {
       console.error('Finansal soru cevaplanırken hata:', error);
@@ -142,6 +169,13 @@ const aiService = {
       const isAnomaly = transaction.amount > 1000;
       return { isAnomaly };
     }
+  },
+
+  /**
+   * Önbelleği temizle
+   */
+  clearCache: () => {
+    apiCache.clear();
   }
 };
 
