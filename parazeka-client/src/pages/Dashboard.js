@@ -6,7 +6,7 @@ import { fetchAccounts } from '../store/accountSlice';
 import FinancialInsights from '../components/AI/FinancialInsights';
 import FinanceAssistant from '../components/AI/FinanceAssistant';
 import FinancialSummaryChart from '../components/Dashboard/FinancialSummaryChart';
-
+import SpendingAnalysis from '../components/Analysis/SpendingAnalysis';
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { transactions, loading: transactionsLoading } = useSelector(state => state.transactions);
