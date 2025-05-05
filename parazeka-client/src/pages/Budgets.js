@@ -1,7 +1,9 @@
 // src/pages/Budgets.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBudgets } from '../store/budgetSlice';
+import { fetchTransactions } from '../store/transactionSlice';
+import { fetchCategories } from '../store/categorySlice';
+import BudgetPlanner from '../components/Budget/BudgetPlanner';
 
 const Budgets = () => {
   const dispatch = useDispatch();
