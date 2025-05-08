@@ -18,6 +18,7 @@ const Transactions = lazy(() => import('./pages/Transactions'));
 const Accounts = lazy(() => import('./pages/Accounts'));
 const Budgets = lazy(() => import('./pages/Budgets'));
 const Goals = lazy(() => import('./pages/Goals'));
+const Reports = lazy(() => import('./pages/Reports')); // Yeni eklenen Reports sayfası
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 
@@ -72,6 +73,11 @@ function App() {
               <Route path="/goals" element={
                 <ProtectedRoute>
                   <Goals />
+                </ProtectedRoute>
+              } />
+              <Route path="/reports" element={
+                <ProtectedRoute>
+                  <Reports />
                 </ProtectedRoute>
               } />
             </Routes>
