@@ -1,0 +1,390 @@
+/* src/components/Forecasting/CashFlowForecast.css */
+.cash-flow-forecast {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.forecast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+
+.forecast-title h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.forecast-title p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.forecast-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.scenario-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.scenario-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.scenario-button:hover {
+  background-color: #f8f9fa;
+}
+
+.scenario-button.active {
+  background-color: var(--scenario-color);
+  color: white;
+  border-color: var(--scenario-color);
+}
+
+.scenario-button.active svg {
+  color: white;
+}
+
+.settings-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.settings-toggle:hover {
+  background-color: #e0e0e0;
+}
+
+.settings-toggle .rotated {
+  transform: rotate(180deg);
+}
+
+.forecast-settings {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.settings-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-group label {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.settings-group select,
+.settings-group input[type="number"] {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.settings-group input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.forecast-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  transition: box-shadow 0.2s;
+}
+
+.summary-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  font-size: 14px;
+  margin: 0;
+  color: #666;
+}
+
+.card-header svg {
+  color: #999;
+}
+
+.card-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-change {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.card-change.positive {
+  color: #27ae60;
+}
+
+.card-change.negative {
+  color: #e74c3c;
+}
+
+.status-card .card-value {
+  font-size: 16px;
+}
+
+.forecast-charts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.chart-container {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+.chart-container h3 {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.custom-tooltip {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.forecast-details {
+  margin-bottom: 20px;
+}
+
+.details-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.details-toggle .rotated {
+  transform: rotate(180deg);
+}
+
+.details-table {
+  overflow-x: auto;
+}
+
+.details-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.details-table th,
+.details-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.details-table th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  color: #666;
+}
+
+.details-table td {
+  color: #333;
+}
+
+.details-table .income {
+  color: #27ae60;
+}
+
+.details-table .expense {
+  color: #e74c3c;
+}
+
+.forecast-assumptions {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  border-left: 4px solid #3498db;
+}
+
+.forecast-assumptions h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.forecast-assumptions ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.forecast-assumptions li {
+  margin-bottom: 5px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Loading and Error States */
+.cash-flow-forecast.loading,
+.cash-flow-forecast.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cash-flow-forecast.error svg {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.cash-flow-forecast.error button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .forecast-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .forecast-controls {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  
+  .scenario-selector {
+    flex-wrap: wrap;
+  }
+  
+  .forecast-settings {
+    grid-template-columns: 1fr;
+  }
+  
+  .forecast-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-container {
+    padding: 15px;
+  }
+  
+  .details-table {
+    overflow-x: scroll;
+  }
+}
+
+@media (max-width: 480px) {
+  .cash-flow-forecast {
+    padding: 15px;
+  }
+  
+  .scenario-button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .forecast-title h2 {
+    font-size: 18px;
+  }
+}
