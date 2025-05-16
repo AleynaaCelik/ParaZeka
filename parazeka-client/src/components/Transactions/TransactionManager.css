@@ -1,0 +1,775 @@
+/* src/components/Transactions/TransactionManager.css */
+.transaction-manager {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.transaction-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.transaction-manager-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.transaction-manager-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Özet Kartları */
+.transaction-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card.total {
+  background-color: #ecf0f1;
+}
+
+.summary-card.income {
+  background-color: rgba(39, 174, 96, 0.1);
+}
+
+.summary-card.expense {
+  background-color: rgba(231, 76, 60, 0.1);
+}
+
+.summary-card.balance {
+  background-color: rgba(74, 134, 232, 0.1);
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 16px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card.total .summary-icon {
+  color: #2c3e50;
+}
+
+.summary-card.income .summary-icon {
+  color: #27ae60;
+}
+
+.summary-card.expense .summary-icon {
+  color: #e74c3c;
+}
+
+.summary-card.balance .summary-icon {
+  color: #4a86e8;
+}
+
+.summary-content {
+  flex: 1;
+}
+
+.summary-content h3 {
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+}
+
+.summary-card.income .summary-value {
+  color: #27ae60;
+}
+
+.summary-card.expense .summary-value {
+  color: #e74c3c;
+}
+
+.summary-card.balance .summary-value {
+  color: #4a86e8;
+}
+
+/* Filtreler Bölümü */
+.transaction-filters {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.filters-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filters-row:last-child {
+  margin-bottom: 0;
+}
+
+.search-field {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 40px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4a86e8;
+  box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.2);
+}
+
+.date-range {
+  display: flex;
+  gap: 12px;
+}
+
+.date-field {
+  display: flex;
+  align-items: center;
+}
+
+.date-field label {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.date-field input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-add, .btn-export {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-add {
+  background-color: #4a86e8;
+  color: white;
+}
+
+.btn-add:hover {
+  background-color: #3a76d8;
+}
+
+.btn-export {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-export:hover {
+  background-color: #219653;
+}
+
+.filter-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.filter-dropdown-toggle:hover {
+  border-color: #bbb;
+}
+
+.filter-dropdown-toggle svg:last-child {
+  margin-left: 4px;
+}
+
+.filter-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  width: 200px;
+  margin-top: 4px;
+  padding: 8px 0;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  display: none;
+}
+
+.filter-dropdown:hover .filter-dropdown-menu {
+  display: block;
+}
+
+.filter-option {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-option:hover {
+  background-color: #f5f5f5;
+}
+
+.filter-option.active {
+  background-color: #e6f0ff;
+  color: #4a86e8;
+  font-weight: 500;
+}
+
+.categories-menu {
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.category-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.category-option:hover {
+  background-color: #f5f5f5;
+}
+
+.category-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.category-checkbox input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.category-checkbox input:checked ~ .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background-color: #4a86e8;
+}
+
+.category-name {
+  font-size: 14px;
+}
+
+.category-badge {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.category-badge.income {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.category-badge.expense {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.empty-categories {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-clear-filters {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  color: #666;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-clear-filters:hover {
+  background-color: #e5e5e5;
+}
+
+.btn-clear-filters:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* İşlem Tablosu */
+.transaction-table-container {
+  margin-bottom: 24px;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.transaction-table th.sortable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.transaction-table th.sortable:hover {
+  background-color: #eef2f7;
+}
+
+.transaction-table th.active {
+  background-color: #e6f0ff;
+  color: #4a86e8;
+}
+
+.transaction-table th .sort-icon {
+  margin-left: 6px;
+}
+
+.transaction-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #333;
+}
+
+.transaction-table tr:hover td {
+  background-color: #f5f9ff;
+}
+
+.transaction-table tr.income {
+  background-color: rgba(39, 174, 96, 0.03);
+}
+
+.transaction-table tr.expense {
+  background-color: rgba(231, 76, 60, 0.03);
+}
+
+.transaction-table .date-cell {
+  white-space: nowrap;
+  color: #555;
+}
+
+.transaction-description {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.description-text {
+  display: inline-block;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.transaction-notes {
+  font-size: 12px;
+  cursor: help;
+}
+
+.category-cell {
+  white-space: nowrap;
+}
+
+.category-label {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.category-unknown {
+  background-color: #f1f1f1;
+  color: #888;
+}
+
+.amount-column {
+  text-align: right;
+}
+
+.amount-cell {
+  text-align: right;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.amount-cell.income {
+  color: #27ae60;
+}
+
+.amount-cell.expense {
+  color: #e74c3c;
+}
+
+.actions-column {
+  text-align: center;
+  width: 100px;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.action-btn.edit:hover {
+  color: #4a86e8;
+}
+
+.action-btn.delete:hover {
+  color: #e74c3c;
+}
+
+/* Boş, Hata ve Yükleme Durumları */
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: #666;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top-color: #4a86e8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-state svg {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.retry-button,
+.clear-filters-button,
+.add-transaction-button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #4a86e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover,
+.clear-filters-button:hover,
+.add-transaction-button:hover {
+  background-color: #3a76d8;
+}
+
+.empty-state svg {
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+
+.empty-state h3 {
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Sayfalama */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.pagination-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.page-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-size-select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: white;
+  font-size: 14px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #f1f1f1;
+}
+
+.pagination-btn.first {
+  border-radius: 4px 0 0 4px;
+}
+
+.pagination-btn.last {
+  border-radius: 0 4px 4px 0;
+}
+
+.pagination-pages {
+  display: flex;
+  margin: 0 4px;
+}
+
+.pagination-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 0 2px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.pagination-page:hover {
+  background-color: #f1f1f1;
+}
+
+.pagination-page.active {
+  background-color: #4a86e8;
+  color: white;
+  border-color: #4a86e8;
+}
+
+/* Duyarlı Tasarım Uyarlamaları */
+@media (max-width: 768px) {
+  .transaction-summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-range {
+    flex-direction: column;
+  }
+  
+  .action-buttons {
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .pagination-container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .pagination-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
