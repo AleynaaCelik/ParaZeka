@@ -1,0 +1,122 @@
+/* src/components/Dashboard/AiInsightCard.css */
+.insight-item {
+  display: flex;
+  padding: 16px;
+  border-radius: 8px;
+  gap: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.insight-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.insight-item.tip {
+  background-color: rgba(74, 134, 232, 0.1);
+  border-left: 3px solid #4a86e8;
+}
+
+.insight-item.warning {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #e74c3c;
+}
+
+.insight-item.saving {
+  background-color: rgba(39, 174, 96, 0.1);
+  border-left: 3px solid #27ae60;
+}
+
+.insight-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.insight-item.tip .insight-icon {
+  color: #4a86e8;
+}
+
+.insight-item.warning .insight-icon {
+  color: #e74c3c;
+}
+
+.insight-item.saving .insight-icon {
+  color: #27ae60;
+}
+
+.insight-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.insight-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.insight-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.insight-action {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #4a86e8;
+  text-decoration: none;
+  margin-top: 4px;
+  width: fit-content;
+  transition: color 0.2s;
+}
+
+.insight-action:hover {
+  color: #2c5aa0;
+  text-decoration: underline;
+}
+
+.insight-parameters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.insight-parameter {
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.parameter-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.parameter-value {
+  color: #333;
+}
+
+/* Duyarlı Tasarım */
+@media (max-width: 576px) {
+  .insight-item {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .insight-icon {
+    align-items: flex-start;
+    margin-top: 0;
+  }
+}
