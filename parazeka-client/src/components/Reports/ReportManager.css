@@ -1,0 +1,1244 @@
+/* src/components/Reports/ReportManager.css */
+.report-manager {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.report-manager-header {
+  margin-bottom: 24px;
+}
+
+.report-manager-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.report-manager-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Rapor Menüsü */
+.report-menu {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.report-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.report-menu-item:hover {
+  background-color: #f8f9fa;
+}
+
+.report-menu-item.active {
+  background-color: #4a86e8;
+  color: white;
+  border-color: #4a86e8;
+}
+
+/* Filtreler */
+.report-filters {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.date-range-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 280px;
+}
+
+.date-range-filter label {
+  font-size: 14px;
+  color: #666;
+}
+
+.category-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.category-filter label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+.category-filter-dropdown {
+  position: relative;
+}
+
+.filter-button {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-arrow {
+  font-size: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  min-width: 240px;
+  margin-top: 4px;
+  padding: 8px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+}
+
+.category-filter-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.category-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: 4px;
+}
+
+.category-checkbox:hover {
+  background-color: #f8f9fa;
+}
+
+.category-checkbox input {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-custom {
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: white;
+}
+
+.category-checkbox input:checked ~ .checkbox-custom::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background-color: #4a86e8;
+}
+
+.category-color {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 8px;
+}
+
+.category-name {
+  font-size: 14px;
+  color: #333;
+}
+
+.report-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.export-button,
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-button {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+}
+
+.export-button:hover {
+  background-color: #219653;
+}
+
+.share-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.share-button:hover {
+  background-color: #2980b9;
+}
+
+/* Rapor İçeriği */
+.report-content {
+  padding: 16px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Özet Raporu */
+.overview-report {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.summary-card {
+  display: flex;
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.summary-card.income .summary-icon {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.summary-card.expense .summary-icon {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.summary-card.balance .summary-icon {
+  background-color: rgba(74, 134, 232, 0.1);
+  color: #4a86e8;
+}
+
+.summary-card.metrics .summary-icon {
+  background-color: rgba(155, 89, 182, 0.1);
+  color: #9b59b6;
+}
+
+.summary-content {
+  flex: 1;
+}
+
+.summary-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.summary-value {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.summary-change {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.change-up {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #27ae60;
+}
+
+.change-down {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #e74c3c;
+}
+
+.change-period {
+  color: #999;
+}
+
+.saving-rate,
+.average-expense {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+}
+
+.rate-value,
+.avg-value {
+  font-weight: 500;
+  color: #4a86e8;
+}
+
+.report-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.chart-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 16px;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.chart-content {
+  padding: 16px 0;
+}
+
+.chart-content.with-padding {
+  padding: 16px;
+}
+
+.top-categories {
+  margin-bottom: 24px;
+}
+
+.top-categories h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+}
+
+.category-rank {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4a86e8;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-info {
+  flex: 1;
+}
+
+.category-amount {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.category-percentage {
+  font-size: 14px;
+  color: #666;
+}
+
+.report-insights {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.insights-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 16px;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.insights-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.insight-item {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.insight-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.insight-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.insight-item.positive {
+  background-color: rgba(39, 174, 96, 0.1);
+  border-left: 3px solid #27ae60;
+}
+
+.insight-item.positive h4 {
+  color: #27ae60;
+}
+
+.insight-item.negative {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-left: 3px solid #e74c3c;
+}
+
+.insight-item.negative h4 {
+  color: #e74c3c;
+}
+
+.insight-item.neutral {
+  background-color: rgba(74, 134, 232, 0.1);
+  border-left: 3px solid #4a86e8;
+}
+
+.insight-item.neutral h4 {
+  color: #4a86e8;
+}
+
+/* Gelir-Gider Raporu */
+.income-expense-report {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.time-series-chart {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.categories-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.top-categories-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.categories-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Kategori Raporu */
+.category-report {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pie-chart-container {
+  height: 300px;
+  margin-bottom: 24px;
+}
+
+.categories-table {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: flex;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.header-cell {
+  flex: 1;
+  padding: 12px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.table-body {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #eee;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.type-cell {
+  justify-content: center;
+}
+
+.type-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.type-badge.income {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+.type-badge.expense {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.amount-cell {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.percentage-cell {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.sub-category-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.sub-category-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.sub-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.sub-category-header h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+  flex: 1;
+}
+
+.category-comparison {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.comparison-chart {
+  height: 400px;
+}
+
+/* Bütçe Raporu */
+.budget-report {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.budget-performance {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.performance-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.budget-card {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 16px;
+}
+
+.budget-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.budget-name {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.budget-period {
+  font-size: 14px;
+  color: #666;
+}
+
+.budget-progress {
+  margin-bottom: 16px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.budget-amount {
+  font-size: 14px;
+  color: #666;
+}
+
+.budget-percentage {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.progress-bar.normal {
+  background-color: #4a86e8;
+}
+
+.progress-bar.caution {
+  background-color: #f39c12;
+}
+
+.progress-bar.warning {
+  background-color: #e67e22;
+}
+
+.progress-bar.danger {
+  background-color: #e74c3c;
+}
+
+.budget-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.mini-category {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.mini-category .category-color {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.mini-category .category-name {
+  flex: 1;
+  color: #666;
+}
+
+.mini-category .category-amount {
+  font-weight: 500;
+  color: #333;
+}
+
+.budget-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.budget-status {
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.budget-status.normal {
+  background-color: rgba(74, 134, 232, 0.1);
+  color: #4a86e8;
+}
+
+.budget-status.caution {
+  background-color: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+}
+
+.budget-status.warning {
+  background-color: rgba(230, 126, 34, 0.1);
+  color: #e67e22;
+}
+
+.budget-status.danger {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+.budget-remaining {
+  color: #666;
+}
+
+.savings-projection {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.projection-chart {
+  height: 300px;
+  margin-bottom: 16px;
+}
+
+.projection-info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.info-item {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.info-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.info-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #4a86e8;
+}
+
+/* Hedef Raporu */
+.goal-report {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.goal-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.goals-progress {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.goal-progress-item {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.goal-progress-item.on-track {
+  border-left: 4px solid #4a86e8;
+}
+
+.goal-progress-item.completed {
+  border-left: 4px solid #27ae60;
+}
+
+.goal-progress-item.at-risk {
+  border-left: 4px solid #e67e22;
+}
+
+.goal-progress-item.overdue {
+  border-left: 4px solid #e74c3c;
+}
+
+.goal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.goal-name {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.goal-type {
+  font-size: 14px;
+  color: #666;
+}
+
+.goal-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #888;
+}
+
+.goal-amounts {
+  display: flex;
+  gap: 12px;
+  text-align: center;
+}
+
+.current-amount,
+.target-amount {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.amount-label {
+  font-size: 12px;
+  font-weight: normal;
+  color: #888;
+  margin-top: 4px;
+}
+
+.goal-progress-bar {
+  grid-column: 1 / -1;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-percentage {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4a86e8;
+}
+
+.remaining-amount {
+  font-size: 14px;
+  color: #666;
+}
+
+.days-left {
+  color: #4a86e8;
+}
+
+.days-overdue {
+  color: #e74c3c;
+}
+
+.goal-completion-forecast {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+}
+
+.forecast-table {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.progress-cell {
+  padding: 8px 12px;
+}
+
+.mini-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-percentage {
+  font-size: 12px;
+  font-weight: 500;
+  color: #4a86e8;
+}
+
+.mini-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.mini-bar {
+  height: 100%;
+  background-color: #4a86e8;
+  border-radius: 2px;
+}
+
+.date-cell {
+  white-space: nowrap;
+}
+
+.status-cell {
+  text-align: center;
+  justify-content: center;
+}
+
+.status-badge {
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.status-badge.on-track {
+  background-color: rgba(74, 134, 232, 0.1);
+  color: #4a86e8;
+}
+
+.status-badge.delayed {
+  background-color: rgba(230, 126, 34, 0.1);
+  color: #e67e22;
+}
+
+.status-badge.nearly-complete {
+  background-color: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+}
+
+/* Yükleme, Hata ve Boş Durumlar */
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top-color: #4a86e8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-state svg {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+.retry-button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #4a86e8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #3a76d8;
+}
+
+.empty-state svg {
+  opacity: 0.4;
+  margin-bottom: 10px;
+}
+
+.empty-state h3 {
+  margin: 10px 0 5px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Duyarlı Tasarım için Medya Sorguları */
+@media (max-width: 992px) {
+  .report-details {
+    grid-template-columns: 1fr;
+  }
+  
+  .goal-progress-item {
+    grid-template-columns: 1fr;
+  }
+  
+  .projection-info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-menu {
+    flex-wrap: wrap;
+  }
+  
+  .report-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .report-actions {
+    margin-left: 0;
+    margin-top: 16px;
+    justify-content: space-between;
+  }
+  
+  .export-button, 
+  .share-button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .categories-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .performance-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .goal-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .chart-content {
+    padding: 8px 0;
+  }
+  
+  .table-header,
+  .table-row {
+    flex-direction: column;
+  }
+  
+  .header-cell,
+  .table-cell {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .header-cell:first-child,
+  .table-cell:first-child {
+    background-color: #f8f9fa;
+    font-weight: 500;
+  }
+  
+  .category-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .category-percentage {
+    margin-top: 4px;
+  }
+  
+  .budget-footer {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
